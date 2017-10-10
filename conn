@@ -1,0 +1,35 @@
+#!/Users/sameerraghuram/anaconda3/bin/python
+
+import argparse
+import subprocess
+
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(
+        description="A wrapper around ssh to help me connect to RIT CS machines quickly"
+    )
+
+    # Machine name as a positional argument
+    parser.add_argument(
+        'machine',
+        nargs=1
+    )
+
+    parser.add_argument(
+        '-u',
+        '--user',
+        default=['sr3669'],
+        nargs=1,
+        help='Username to connect with'
+    )
+
+    args = parser.parse_args()
+    
+    machine = "{}.cs.rit.edu".format(args.machine[0])
+    user=args.user[0]
+
+    # connect via ssh
+    subprocess.run(['ssh', '{}@{}'.format(user, machine)])
+
+    
